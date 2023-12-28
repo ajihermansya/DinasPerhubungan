@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.activity:activity-ktx:1.8.1")
+    implementation ("hu.autsoft:krate:2.0.0")
 
     //glide library
     implementation ("com.github.bumptech.glide:glide:4.16.0")
