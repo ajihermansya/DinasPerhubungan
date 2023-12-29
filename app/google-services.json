@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "780053173453",
+    "project_id": "dinasperhubungan-e9cf2",
+    "storage_bucket": "dinasperhubungan-e9cf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780053173453:android:13b02b8da4e4903c058584",
+        "android_client_info": {
+          "package_name": "com.dinas.perhubungan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrbCSf-LrX0JUge8ZMA6huPMmFwqz_XWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
