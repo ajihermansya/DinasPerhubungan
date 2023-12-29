@@ -19,4 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_dinas"
         android:contentDescription="@string/todo" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

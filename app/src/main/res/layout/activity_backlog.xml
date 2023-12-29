@@ -8,8 +8,6 @@
     android:background="@color/white"
     app:layoutDescription="@xml/activity_splash_scene"
     tools:context=".ui.splash.BacklogActivity">
-
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -24,28 +22,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.47000003" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="@string/description_splash"
         android:textColor="@color/black"
         android:fontFamily="@font/poppins_light"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/logoMenu1"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:src="@drawable/image_backlog_one"
+        android:layout_height="100dp"
+        android:src="@drawable/visi_misi"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView5"
         android:contentDescription="@string/todo"/>
@@ -53,7 +50,7 @@
         android:id="@+id/titleMenu1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:gravity="center_horizontal"
         android:text="@string/title_menu1"
         android:fontFamily="@font/poppins_semibold"
@@ -67,7 +64,7 @@
         android:id="@+id/descMenu1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:text="@string/description_menu1"
         android:textColor="@color/black"
@@ -82,7 +79,7 @@
         android:id="@+id/logoMenu2"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:src="@drawable/image_backlog_tree"
+        android:src="@drawable/aman_nyaman"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView5"
         android:contentDescription="@string/todo"/>
@@ -119,7 +116,7 @@
         android:id="@+id/logoMenu3"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:src="@drawable/imagae_backlog_two"
+        android:src="@drawable/satu_gengaman"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView5"
         android:contentDescription="@string/todo"/>
