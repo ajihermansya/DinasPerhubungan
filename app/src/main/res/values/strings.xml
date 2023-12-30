@@ -11,4 +11,18 @@
     <string name="let_start">Solusi Terpadu dalam Genggaman</string>
     <string name="description_menu3">"Melalui integrasi layanan dalam satu platform, pengguna dapat dengan mudah memenuhi berbagai kebutuhan mereka. Dengan sekali genggaman, aplikasi ini menjadi teman setia dalam menyelesaikan tugas sehari-hari.</string>
     <string name="start_now">Mulai</string>
+    <string name="hint_email">email</string>
+    <string name="alert_email_required">Email required!</string>
+    <string name="alert_email_error">Invalid Email</string>
+    <string name="alert_email_example_com_not_allowed">Email with @example.com domain is not allowed!</string>
+    <string name="login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="error_password">Password must be at least 8 characters long!</string>
+    <string name="masukan_nip_anda">Masukan NIP Anda</string>
+    <string name="username">Username</string>
+    <string name="show_password">Show Password</string>
+    <string name="aplikasi_kenaikan_pangkat">Aplikasi Kenaikan Pangkat</string>
+    <string name="desc_apps">Pegawai Dinas Perhubungan Kabupaten Banyuwangi</string>
+    <string name="daftar">Blum mempunyai akun?</string>
+    <string name="tv_daftar">Daftar</string>
 </resources>
