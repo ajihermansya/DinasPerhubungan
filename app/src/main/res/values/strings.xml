@@ -25,4 +25,12 @@
     <string name="desc_apps">Pegawai Dinas Perhubungan Kabupaten Banyuwangi</string>
     <string name="daftar">Blum mempunyai akun?</string>
     <string name="tv_daftar">Daftar</string>
+    <string name="des_regis">Buat Akunmu - untuk masuk ke dalam aplikasi dan Nikmati layanan kami</string>
+    <string name="unggah_foto">Unggah Foto</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="bintang">*</string>
+    <string name="nip">Nip</string>
+    <string name="nomor_telepon_wa">Nomor Telepon/WA</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
 </resources>
