@@ -11,6 +11,7 @@ import com.dinas.perhubungan.data.PrefsManager
 import com.dinas.perhubungan.databinding.ActivitySplashBinding
 import com.dinas.perhubungan.ui.loginregis.LoginActivity
 import com.dinas.perhubungan.ui.mainhome.HomeActivity
+import com.dinas.perhubungan.ui.mainhome.HomeAdminActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -36,7 +37,8 @@ class SplashActivity : AppCompatActivity() {
             } else {
                 val prefsManager = PrefsManager(this@SplashActivity)
                 if (prefsManager.isExampleLogin) {
-                    Intent(this@SplashActivity, LoginActivity::class.java)
+                    Intent(this@SplashActivity, HomeActivity::class.java)
+                    Intent(this@SplashActivity, HomeAdminActivity::class.java)
                 } else {
                     Intent(this@SplashActivity, LoginActivity::class.java)
                 }

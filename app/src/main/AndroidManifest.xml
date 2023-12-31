@@ -25,6 +25,12 @@
         android:theme="@style/Theme.DinasPerhubungan"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu_admin.UploadDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu_admin.DataPegawaiActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.mainhome.HomeAdminActivity"
             android:exported="false" />
         <activity

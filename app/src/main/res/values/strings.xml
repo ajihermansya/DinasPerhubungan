@@ -33,4 +33,11 @@
     <string name="nomor_telepon_wa">Nomor Telepon/WA</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="desc_dishub">Pegawai Dinas Perhubungan Kabupaten Banyuwangi</string>
+    <string name="welcom_admin">Selamat Datang Admin</string>
+    <string name="desc_weldim">Dinas Perhubungan Kabupaten Banyuwangi</string>
+    <string name="data_pegawai">Data Pegawai</string>
+    <string name="upload_data">Upload Data</string>
+    <string name="aktivitas_pengguna">Aktivitas Pengguna</string>
+    <string name="logout">Logout</string>
 </resources>

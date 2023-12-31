@@ -10,6 +10,7 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.dinas.perhubungan.data.PrefsManager
 import com.dinas.perhubungan.databinding.ActivityLoginBinding
 import com.dinas.perhubungan.ui.mainhome.HomeActivity
 import com.dinas.perhubungan.ui.mainhome.HomeAdminActivity
@@ -21,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var prefsManager: PrefsManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,12 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
         Animation()
 
+        prefsManager = PrefsManager(this)
+        mAuth = FirebaseAuth.getInstance()
+
         binding.tvDaftar.setOnClickListener {  startActivity(Intent(this, RegisterActivity::class.java))  }
 
-        mAuth = FirebaseAuth.getInstance()
+
 
         binding.loginshowPwd.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -67,12 +72,17 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = mAuth.currentUser
                     if (user != null) {
+
                         val email = user.email ?: "$nip@dishub.com"
                         if (email.endsWith("@dishub.com")) {
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
-                        } else {
+                        }
+                        else {
+                            // Tambahkan penggunaan SharedPreferences di sini
+                            prefsManager.userEmail = nip
+                            prefsManager.isExampleLogin = true
                             loginAdmin(nip, password)
                         }
                     }
@@ -91,6 +101,10 @@ class LoginActivity : AppCompatActivity() {
                     if (user != null) {
                         val email = user.email ?: "$nip@gmail.com"
                         if (email.endsWith("@gmail.com")) {
+                            val prefsManager = PrefsManager(this)
+                            prefsManager.isAdminLoggedIn = true
+                            prefsManager.userEmail = nip
+                            prefsManager.isExampleLogin = true
                             val intent = Intent(this, HomeAdminActivity::class.java)
                             startActivity(intent)
                             finish()
