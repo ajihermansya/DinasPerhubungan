@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -26,6 +25,9 @@
         android:theme="@style/Theme.DinasPerhubungan"
         tools:targetApi="31">
         <activity
+            android:name=".ui.mainhome.HomeAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.mainhome.HomeActivity"
             android:exported="false" />
         <activity
@@ -39,19 +41,21 @@
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

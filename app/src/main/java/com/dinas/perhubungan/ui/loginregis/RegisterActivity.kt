@@ -20,7 +20,6 @@ import com.google.firebase.storage.FirebaseStorage
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var storage: FirebaseStorage
