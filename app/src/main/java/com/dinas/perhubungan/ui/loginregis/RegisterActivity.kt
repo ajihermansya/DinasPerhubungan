@@ -33,6 +33,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        binding.tvLogin.setOnClickListener {  startActivity(Intent(this, LoginActivity::class.java))  }
+
         dialog = AlertDialog.Builder(this)
             .setMessage("Updating Profile...")
             .setCancelable(false)
@@ -86,34 +88,44 @@ class RegisterActivity : AppCompatActivity() {
         if (TextUtils.isEmpty(namaPanjang) || TextUtils.isEmpty(nip) || TextUtils.isEmpty(tlpn)
             || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
         ) {
-            Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+            showAlertDialog("Please fill in all the fields")
             return false
         }
 
         val regexNama = Regex("^[a-zA-Z ]+\$")
         if (!regexNama.matches(namaPanjang)) {
-            Toast.makeText(this, "Full name should only contain letters and spaces", Toast.LENGTH_SHORT).show()
+            showAlertDialog("Full name should only contain letters and spaces")
             return false
         }
 
         if (nip.length != 18 || !nip.matches(Regex("^[0-9]{18}$"))) {
-            Toast.makeText(this, "NIP must be exactly 18 digits and contain only numbers", Toast.LENGTH_SHORT).show()
+            showAlertDialog("NIP must be exactly 18 digits and contain only numbers")
             return false
         }
 
         if (tlpn.length !in 11..13 || !Patterns.PHONE.matcher(tlpn).matches()) {
-            Toast.makeText(this, "Check your phone number", Toast.LENGTH_SHORT).show()
+            showAlertDialog("Check your phone number")
             return false
         }
 
         val passwordPattern = Regex("^(?=.*[A-Z])(?=.*\\d).{6,}\$")
         if (password != confirmPassword || !password.matches(passwordPattern)) {
-            Toast.makeText(this, "Password must match Confirm Password and contain at least one uppercase letter and one digit", Toast.LENGTH_SHORT).show()
+            showAlertDialog("Password must match Confirm Password and contain at least one uppercase letter and one digit")
             return false
         }
 
-
         return true
+    }
+
+    private fun showAlertDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Validation Error")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -131,7 +143,7 @@ class RegisterActivity : AppCompatActivity() {
         password: String
     ) {
         if (!::selectedImg.isInitialized) {
-            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
+            showAlertDialog("Please select an image")
             return
         }
         showLoading(true)

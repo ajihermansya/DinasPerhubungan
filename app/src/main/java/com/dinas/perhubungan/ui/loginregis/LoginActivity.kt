@@ -21,15 +21,15 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        binding.tvDaftar.setOnClickListener {  startActivity(Intent(this, RegisterActivity::class.java))  }
         Animation()
+
+        binding.tvDaftar.setOnClickListener {  startActivity(Intent(this, RegisterActivity::class.java))  }
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordNp.text.toString()
 
             loginUp(nip, password)
+            loginAdmin(nip, password)
         }
 
     }
@@ -59,29 +60,45 @@ class LoginActivity : AppCompatActivity() {
         }
 
         showLoading(true)
+
         mAuth.signInWithEmailAndPassword("$nip@dishub.com", password)
             .addOnCompleteListener(this) { task ->
                 showLoading(false)
                 if (task.isSuccessful) {
-                    mAuth.currentUser
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-
-                } else {
-                    val builder = AlertDialog.Builder(this@LoginActivity)
-                    builder.setTitle("Login Failed")
-                        .setMessage("Invalid email or password. Please try again.")
-                        .setPositiveButton("OK") { dialog, _ ->
-                            dialog.dismiss()
+                    val user = mAuth.currentUser
+                    if (user != null) {
+                        val email = user.email ?: "$nip@dishub.com"
+                        if (email.endsWith("@dishub.com")) {
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            loginAdmin(nip, password)
                         }
-                    val dialog = builder.create()
-                    dialog.show()
+                    }
+                } else {
+                    showLoginFailedDialog()
                 }
-
             }
     }
 
+    private fun loginAdmin(nip: String, password: String) {
+        mAuth.signInWithEmailAndPassword("$nip@gmail.com", password)
+            .addOnCompleteListener(this) { task ->
+                showLoading(false)
+                if (task.isSuccessful) {
+                    val user = mAuth.currentUser
+                    if (user != null) {
+                        val email = user.email ?: "$nip@gmail.com"
+                        if (email.endsWith("@gmail.com")) {
+                            val intent = Intent(this, HomeAdminActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                }
+            }
+    }
 
     private fun Animation() {
         ObjectAnimator.ofFloat(binding.imageView3, View.TRANSLATION_Y, -20f, 20f).apply {
@@ -94,6 +111,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showLoginFailedDialog() {
+        val builder = AlertDialog.Builder(this@LoginActivity)
+        builder.setTitle("Login Failed")
+            .setMessage("Invalid NIP or password. Please try again.")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }
