@@ -68,73 +68,110 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.inputPassword.text.toString()
             val confirmpassword = binding.inputConfirmPassword.text.toString()
 
-            signUp(nama_panjang, nip, tlpn, password, confirmpassword)
+
+            if (validateFields(nama_panjang, nip, tlpn, password, confirmpassword)) {
+                createUser(nama_panjang, nip, tlpn, password)
+            }
         }
 
     }
 
 
-    private fun signUp(
-        nama_panjang: String,
+    private fun validateFields(
+        namaPanjang: String,
         nip: String,
         tlpn: String,
-        confirmpassword : String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
+        if (TextUtils.isEmpty(namaPanjang) || TextUtils.isEmpty(nip) || TextUtils.isEmpty(tlpn)
+            || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
+        ) {
+            Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        val regexNama = Regex("^[a-zA-Z ]+\$")
+        if (!regexNama.matches(namaPanjang)) {
+            Toast.makeText(this, "Full name should only contain letters and spaces", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (nip.length != 18 || !nip.matches(Regex("^[0-9]{18}$"))) {
+            Toast.makeText(this, "NIP must be exactly 18 digits and contain only numbers", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (tlpn.length !in 11..13 || !Patterns.PHONE.matcher(tlpn).matches()) {
+            Toast.makeText(this, "Check your phone number", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        val passwordPattern = Regex("^(?=.*[A-Z])(?=.*\\d).{6,}\$")
+        if (password != confirmPassword || !password.matches(passwordPattern)) {
+            Toast.makeText(this, "Password must match Confirm Password and contain at least one uppercase letter and one digit", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.data != null) {
+            selectedImg = data.data!!
+            binding.userImage.setImageURI(selectedImg)
+        }
+    }
+
+    private fun createUser(
+        namaPanjang: String,
+        nip: String,
+        tlpn: String,
         password: String
     ) {
-        // Validation for empty fields
-        if (TextUtils.isEmpty(nama_panjang) || TextUtils.isEmpty(nip) || TextUtils.isEmpty(tlpn) || TextUtils.isEmpty(confirmpassword) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this@RegisterActivity, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+        if (!::selectedImg.isInitialized) {
+            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
             return
         }
-
-
-        val regex = Regex("^[a-zA-Z ]+\$")
-        if (!regex.matches(nama_panjang)) {
-            Toast.makeText(this@RegisterActivity, "Nama Panjang harus berisi huruf dan spasi saja", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (nip.length != 18 || !nip.matches(Regex("\\d+"))) {
-            Toast.makeText(this@RegisterActivity, "NIP harus memiliki panjang 18 digit dan hanya berisi angka", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-
-
-        if (tlpn.length <= 10 || tlpn.length > 13) {
-            Toast.makeText(this@RegisterActivity, "Periksa nomor telepon anda", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (TextUtils.isEmpty(confirmpassword) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this@RegisterActivity, "Password dan Konfirmasi Password harus diisi", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (password != confirmpassword) {
-            Toast.makeText(this@RegisterActivity, "Password dan Konfirmasi Password harus sama", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-
-
-        // Proses Sign-Up
         showLoading(true)
-        mAuth.createUserWithEmailAndPassword("$nip@example.com", password)
+        mAuth.createUserWithEmailAndPassword("$nip@dishub.com", password)
             .addOnCompleteListener(this) { task ->
                 showLoading(false)
                 if (task.isSuccessful) {
-                    //code for jumping to home
-                    addUserToDatabase(nama_panjang, nip, tlpn, password, mAuth.currentUser?.uid!!)
-                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val user = mAuth.currentUser
+                    user?.let {
+                        uploadImageToFirebase(namaPanjang, nip, tlpn, password)
+                    }
                 } else {
-                    Toast.makeText(this@RegisterActivity, "Error creating user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error creating user", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
 
 
+    private fun uploadImageToFirebase(
+        namaPanjang: String,
+        nip: String,
+        tlpn: String,
+        password: String
+    ) {
+        val storageRef = storage.reference
+        val imgRef = storageRef.child("images/${mAuth.currentUser?.uid}.jpg")
+
+        imgRef.putFile(selectedImg)
+            .addOnSuccessListener { taskSnapshot ->
+                imgRef.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    addUserToDatabase(namaPanjang, nip, tlpn, password, imageUrl)
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        showLoading(false)
     }
 
 
@@ -142,12 +179,26 @@ class RegisterActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun addUserToDatabase(nama_panjang: String, nip: String, tlpn: String, password: String, confirmpassword: String) {
-        val email = "$nip@example.com"
-        mDbRef = FirebaseDatabase.getInstance().getReference()
-        mDbRef.child("admin").child(nip).setValue(UserModel(nama_panjang, email, tlpn, password, confirmpassword))
+    private fun addUserToDatabase(
+        namaPanjang: String,
+        nip: String,
+        tlpn: String,
+        password: String,
+        imageUrl: String
+    ) {
+        val email = "$nip@dishub.com"
+        val database = FirebaseDatabase.getInstance()
+        mDbRef = database.getReference()
+        mDbRef.child("users").child(nip).setValue(UserModel(namaPanjang, email, tlpn, password, imageUrl))
+            .addOnSuccessListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
-
 
 
 }

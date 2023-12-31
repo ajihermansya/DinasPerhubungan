@@ -146,7 +146,7 @@
                 android:background="@drawable/rectangel_white"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:padding="8dp"
                 android:textSize="12sp"
                 android:textColor="@color/black" />
@@ -299,10 +299,7 @@
                     android:textColor="@color/blue"
                     android:textSize="12sp" />
             </LinearLayout>
-
         </LinearLayout>
-
-
     </ScrollView>
 
     <ProgressBar
@@ -317,7 +314,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

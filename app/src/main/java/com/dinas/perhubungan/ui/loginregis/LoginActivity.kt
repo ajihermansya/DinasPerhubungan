@@ -1,12 +1,10 @@
 package com.dinas.perhubungan.ui.loginregis
 
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.dinas.perhubungan.R
 import com.dinas.perhubungan.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -16,11 +14,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
-
         binding.tvDaftar.setOnClickListener {  startActivity(Intent(this, RegisterActivity::class.java))  }
-
         Animation()
     }
 

@@ -5,5 +5,5 @@ data class UserModel(
     val nip : String?="",
     val tlpn : String?="",
     val password : String?="",
-    val confirmpassword : String?="",
+    val imageUrl : String?="",
 )

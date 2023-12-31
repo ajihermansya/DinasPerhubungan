@@ -8,6 +8,7 @@
     android:background="@color/white"
     app:layoutDescription="@xml/activity_splash_scene"
     tools:context=".ui.splash.BacklogActivity">
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
