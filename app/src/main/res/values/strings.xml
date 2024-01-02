@@ -46,4 +46,6 @@
     <string name="dot">.</string>
     <string name="name">Mohamad Aji Hermansya</string>
     <string name="jabatan">Jabatan</string>
+    <string name="dd_mm_yyyy">DD-MM-YYYY</string>
+    <string name="_628">628</string>
 </resources>

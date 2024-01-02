@@ -188,20 +188,22 @@ class RegisterActivity : AppCompatActivity() {
 
 
         if (nip.length != 18 || !nip.matches(Regex("^[0-9]{18}$"))) {
-            showAlertDialog("NIP must be exactly 18 digits and contain only numbers")
+            showAlertDialog("Apakah anda pegawai Dinas Perhubungan Banyuwangi? Cek NIP anda kembali!")
             return false
         }
 
 
 
-        if (tlpn.length !in 11..13 || !Patterns.PHONE.matcher(tlpn).matches()) {
-            showAlertDialog("Check your phone number")
+        val phoneRegex = Regex("^628\\d{8,10}$")
+        if (!tlpn.matches(phoneRegex)) {
+            showAlertDialog("Nomor telepon harus dimulai dengan 628 dan memiliki panjang 11-13 digit!")
             return false
         }
+
 
         val passwordPattern = Regex("^(?=.*[A-Z])(?=.*\\d).{6,}\$")
         if (password != confirmPassword || !password.matches(passwordPattern)) {
-            showAlertDialog("Password must match Confirm Password and contain at least one uppercase letter and one digit")
+            showAlertDialog("Kata sandi harus sesuai dengan Konfirmasi Kata Sandi dan setidaknya terdiri dari satu huruf besar dan satu angka")
             return false
         }
 
