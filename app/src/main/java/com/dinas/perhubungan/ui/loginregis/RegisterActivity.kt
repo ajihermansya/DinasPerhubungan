@@ -185,6 +185,8 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
 
+
+
         if (tlpn.length !in 11..13 || !Patterns.PHONE.matcher(tlpn).matches()) {
             showAlertDialog("Check your phone number")
             return false
