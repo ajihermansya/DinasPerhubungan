@@ -38,8 +38,11 @@ class SplashActivity : AppCompatActivity() {
                 val prefsManager = PrefsManager(this@SplashActivity)
                 if (prefsManager.isExampleLogin) {
                     Intent(this@SplashActivity, HomeActivity::class.java)
+                }
+                if (prefsManager.isAdminLoggedIn) {
                     Intent(this@SplashActivity, HomeAdminActivity::class.java)
-                } else {
+                }
+                else {
                     Intent(this@SplashActivity, LoginActivity::class.java)
                 }
             }
