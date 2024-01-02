@@ -39,7 +39,7 @@ class SplashActivity : AppCompatActivity() {
                 if (prefsManager.isExampleLogin) {
                     Intent(this@SplashActivity, HomeActivity::class.java)
                 }
-                if (prefsManager.isAdminLoggedIn) {
+                else if (prefsManager.isAdminLoggedIn) {
                     Intent(this@SplashActivity, HomeAdminActivity::class.java)
                 }
                 else {
