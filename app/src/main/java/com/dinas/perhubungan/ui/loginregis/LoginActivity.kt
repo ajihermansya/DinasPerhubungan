@@ -75,15 +75,13 @@ class LoginActivity : AppCompatActivity() {
 
                         val email = user.email ?: "$nip@dishub.com"
                         if (email.endsWith("@dishub.com")) {
+                            val prefsManager = PrefsManager(this)
+                            prefsManager.isAdminLoggedIn = true
+                            prefsManager.userEmail = nip
+                            prefsManager.isExampleLogin = true
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
-                        }
-                        else {
-                            // Tambahkan penggunaan SharedPreferences di sini
-                            prefsManager.userEmail = nip
-                            prefsManager.isExampleLogin = true
-                            loginAdmin(nip, password)
                         }
                     }
                 } else {
