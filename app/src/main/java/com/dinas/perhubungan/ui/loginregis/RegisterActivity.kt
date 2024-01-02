@@ -180,6 +180,13 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
 
+        val dateRegex = Regex("^\\d{2}-\\d{2}-\\d{4}$")
+        if (!tanggal.matches(dateRegex)) {
+            showAlertDialog("Tanggal harus dalam format DD-MM-YYYY")
+            return false
+        }
+
+
         if (nip.length != 18 || !nip.matches(Regex("^[0-9]{18}$"))) {
             showAlertDialog("NIP must be exactly 18 digits and contain only numbers")
             return false
