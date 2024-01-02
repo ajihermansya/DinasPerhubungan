@@ -72,12 +72,11 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = mAuth.currentUser
                     if (user != null) {
-
                         val email = user.email ?: "$nip@dishub.com"
                         if (email.endsWith("@dishub.com")) {
                             val prefsManager = PrefsManager(this)
-                            prefsManager.userEmail = nip
                             prefsManager.isExampleLogin = true
+                            prefsManager.userEmail = nip
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
