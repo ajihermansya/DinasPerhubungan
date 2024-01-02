@@ -40,4 +40,10 @@
     <string name="upload_data">Upload Data</string>
     <string name="aktivitas_pengguna">Aktivitas Pengguna</string>
     <string name="logout">Logout</string>
+    <string name="edit">Edit</string>
+    <string name="desc_upload">Data Pegawai Dinas Perhubungan Kabuoaten Banyuwangi</string>
+    <string name="number">1</string>
+    <string name="dot">.</string>
+    <string name="name">Mohamad Aji Hermansya</string>
+    <string name="jabatan">Jabatan</string>
 </resources>

@@ -161,6 +161,74 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
+                    android:text="@string/jabatan"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/bintang"
+                    android:textColor="@color/red" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/input_jabatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rectangel_white"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Tanggal Kenaikan Pangkat"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/bintang"
+                    android:textColor="@color/red" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tanggal_kenaikan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rectangel_white"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="date"
+                android:padding="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/nomor_telepon_wa"
                     android:textColor="@color/black" />
 
