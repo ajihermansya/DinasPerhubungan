@@ -102,8 +102,6 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        binding.tvLogin.setOnClickListener {  startActivity(Intent(this, LoginActivity::class.java))  }
-
         dialog = AlertDialog.Builder(this)
             .setMessage("Updating Profile...")
             .setCancelable(false)
@@ -145,12 +143,17 @@ class RegisterActivity : AppCompatActivity() {
                 if (isRegisteredNIP(nip)) {
                     createUser(nama_panjang, nip, jabatan, tanggal, tlpn, password)
                 } else {
-                    showAlertDialog("NIP is not registered")
+                    showAlertDialog("Apakah anda pegawai Dinas Perhubungan? Tanyakan pada andmin anda!")
                 }
             }
         }
 
+
+        binding.tvLogin.setOnClickListener {  startActivity(Intent(this, LoginActivity::class.java))  }
+
+
     }
+
 
 
     private fun validateFields(
@@ -269,7 +272,7 @@ class RegisterActivity : AppCompatActivity() {
         jabatan: String,
         tanggal: String,
         tlpn: String,
-        password: String
+        password: String,
     ) {
         val storageRef = storage.reference
         val imgRef = storageRef.child("images/${mAuth.currentUser?.uid}.jpg")

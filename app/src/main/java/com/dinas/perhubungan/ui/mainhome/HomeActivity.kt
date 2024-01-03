@@ -13,7 +13,6 @@ import com.dinas.perhubungan.ui.mainhome.fragment.MyFragment
 import com.dinas.perhubungan.ui.mainhome.fragment.NotifikasiFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class HomeActivity : AppCompatActivity() {

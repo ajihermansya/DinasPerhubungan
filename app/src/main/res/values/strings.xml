@@ -58,4 +58,12 @@
     <string name="desc_info_four">Menyediakan sarana dan prasarana penerangan lampu jalan, yang digunakan untuk penerangan jalan dimalam hari sehingga mempermudah pejalan kaki, pesepeda dan pengendara. diharapkan meningkatkan keselamatan lalu lintas dan keamanan.</string>
     <string name="desc_info_five">Perencanaan, pengadaan, pemasangan, pengaturan dan pemeliharaan fasilitas perlengkapan jalan. Dalam rangka mewujudkan, mendukung dan memelihara keamanan, keselamatan, ketertiban, dan kelancaran lalu lintas.</string>
     <string name="desc_info_six">Lalu lintas dan angkutan jalan (LLAJ). Satu kesatuan sistem yang terdisi atas lalu lintas, angkutan jalan, jaringan lalu lintas dan angkutan jalan, prasarana lalu lintas dan angkutan jalan, kendaraan, pengemudi, pengguna jalan, serta pengelolaannya.</string>
+    <string name="My">My</string>
+    <string name="hai">Hai,</string>
+    <string name="email">ajihermansya14@gmail.com</string>
+    <string name="keluar">Keluar</string>
+    <string name="akun_saya">Akun Saya</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="ganti_bahasa">Ganti Bahasa</string>
+    <string name="ketentuan_dan_privasi">Ketentuan dan Privasi</string>
 </resources>
