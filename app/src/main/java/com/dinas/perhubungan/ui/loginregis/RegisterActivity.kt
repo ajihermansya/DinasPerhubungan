@@ -257,7 +257,7 @@ class RegisterActivity : AppCompatActivity() {
                         uploadImageToFirebase(nip, namaPanjang, jabatan, tanggal, tlpn, password)
                     }
                 } else {
-                    Toast.makeText(this, "Error creating user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Succes creating user", Toast.LENGTH_SHORT).show()
                 }
             }
     }

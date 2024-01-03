@@ -1,5 +1,6 @@
 package com.dinas.perhubungan.ui.mainhome
 
+import HomeFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,11 +9,12 @@ import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.PrefsManager
 import com.dinas.perhubungan.databinding.ActivityHomeBinding
 import com.dinas.perhubungan.ui.mainhome.fragment.BookFragment
-import com.dinas.perhubungan.ui.mainhome.fragment.HomeFragment
 import com.dinas.perhubungan.ui.mainhome.fragment.MyFragment
 import com.dinas.perhubungan.ui.mainhome.fragment.NotifikasiFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class HomeActivity : AppCompatActivity() {
 
@@ -20,6 +22,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var mAuth : FirebaseAuth
     private lateinit var prefsManager: PrefsManager
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    private lateinit var currentUserUid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,17 @@ class HomeActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         prefsManager = PrefsManager(this)
+        firebaseAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+
+
+
+        // Mendapatkan informasi pengguna yang sedang masuk, jika ada
+        val currentUser = mAuth.currentUser
+        currentUser?.let {
+            // Pengguna sedang masuk, dapat mengakses informasi tentang pengguna yang sedang masuk di sini
+            currentUserUid = currentUser.uid
+        }
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->

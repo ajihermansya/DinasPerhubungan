@@ -52,4 +52,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nips">3510162302030001</string>
     <string name="jabatan_user">Kepala Bidang Penelitian</string>
+    <string name="desc_info_one">Menyelenggarakan pengkajiaan bahan kebijakan di bidang fasilitasi, koordinasi, pembinaan dan keselamatan di bidang kebandarudaraan dan pelabuhan.</string>
+    <string name="desc_info_two">Pengendalian lalu lintas dengan menyelaraskan waktu lampu merah pada jaringan jalan raya di Kabupaten Banyuwangi. Area traffic control sistem (atcs) Kabupaten Banyuwangi telah di dukung dengan pantauan kamera cctv dan akan terus dimaksimalkan oleh Dinas Perhubungan Kabupaten Banyuwangi.</string>
+    <string name="desc_info_tree">Serangkaian kegiatan menguji dan/atau memeriksa bagian-bagian kendaraan bermotor: kereta gandengan, kereta tempelan dan kendaraan khusus dalam rangka pemenuhan terhadap persyaratan teknis dan layak jalan.</string>
+    <string name="desc_info_four">Menyediakan sarana dan prasarana penerangan lampu jalan, yang digunakan untuk penerangan jalan dimalam hari sehingga mempermudah pejalan kaki, pesepeda dan pengendara. diharapkan meningkatkan keselamatan lalu lintas dan keamanan.</string>
+    <string name="desc_info_five">Perencanaan, pengadaan, pemasangan, pengaturan dan pemeliharaan fasilitas perlengkapan jalan. Dalam rangka mewujudkan, mendukung dan memelihara keamanan, keselamatan, ketertiban, dan kelancaran lalu lintas.</string>
+    <string name="desc_info_six">Lalu lintas dan angkutan jalan (LLAJ). Satu kesatuan sistem yang terdisi atas lalu lintas, angkutan jalan, jaringan lalu lintas dan angkutan jalan, prasarana lalu lintas dan angkutan jalan, kendaraan, pengemudi, pengguna jalan, serta pengelolaannya.</string>
 </resources>
