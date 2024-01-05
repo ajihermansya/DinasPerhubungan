@@ -22,8 +22,6 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
-
-
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -36,13 +34,14 @@
                         android:layout_marginEnd="16dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Tanggal "
+                        android:text="@string/informasi_kenaikan_pangkat"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/poppins_regular"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <Switch
-                        android:id="@+id/notif"
+                        android:id="@+id/notif_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -50,35 +49,21 @@
                         />
 
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/userNames"
-                        android:text="@string/email"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
+                        android:layout_marginTop="10dp"
+                        android:text="23-01-2019"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
                         android:layout_marginBottom="6dp"
-                        android:id="@+id/text_email"/>
+                        android:id="@+id/tanggal_notif"/>
 
                 </RelativeLayout>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/riwayatKonseling"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/shape_rectangel_blue"
-                android:text="@string/keluar"
-                android:layout_marginBottom="20dp"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:cornerRadius="15dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

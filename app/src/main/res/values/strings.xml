@@ -66,4 +66,6 @@
     <string name="notifikasi">Notifikasi</string>
     <string name="ganti_bahasa">Ganti Bahasa</string>
     <string name="ketentuan_dan_privasi">Ketentuan dan Privasi</string>
+    <string name="informasi_kenaikan_pangkat">Informasi Kenaikan Pangkat</string>
+    <string name="notifikasi_informasi">Maaf, tidak ada informasi saat ini!</string>
 </resources>
