@@ -62,9 +62,8 @@ class HomeFragment : Fragment() {
                     binding.nameUser.text = userName
                     binding.nip.text = userNip
                     binding.jabatan.text = userJabatan
-                  binding.userImages
+                    binding.userImages
                     //Glide.with(requireContext()).load(userImage).into(imageView)
-
                     // Menyimpan informasi pengguna ke SharedPreferences
                     saveUserToSharedPreferences(userName, userNip, userJabatan, userImage)
 

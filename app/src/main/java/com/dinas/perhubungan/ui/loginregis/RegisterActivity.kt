@@ -245,7 +245,6 @@ class RegisterActivity : AppCompatActivity() {
         tanggal: String,
         tlpn: String,
         password: String,
-
     ) {
         if (!::selectedImg.isInitialized) {
             showAlertDialog("Please select an image")
@@ -253,20 +252,18 @@ class RegisterActivity : AppCompatActivity() {
         }
         showLoading(true)
         mAuth.createUserWithEmailAndPassword("$nip@dishub.com", password)
-            .addOnCompleteListener(this) { task ->
-                showLoading(false)
-                if (task.isSuccessful) {
-                    val user = mAuth.currentUser
-                    user?.let {
-                        val uid = user.uid
-                        uploadImageToFirebase(nip, uid, namaPanjang, jabatan, tanggal, tlpn, password)
-                    }
-                } else {
-                    Toast.makeText(this, "Error, Coba daftar lagi!", Toast.LENGTH_SHORT).show()
+            .addOnSuccessListener { authResult ->
+                val user = authResult.user
+                user?.let {
+                    val uid = user.uid
+                    uploadImageToFirebase(nip, uid, namaPanjang, jabatan, tanggal, tlpn, password)
                 }
             }
+            .addOnFailureListener { e ->
+                showLoading(false)
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
-
 
     private fun uploadImageToFirebase(
         nip: String,
@@ -289,9 +286,10 @@ class RegisterActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                showLoading(false)
             }
 
-        showLoading(false)
+
 
     }
 
