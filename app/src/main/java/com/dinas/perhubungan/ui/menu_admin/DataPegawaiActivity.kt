@@ -9,13 +9,11 @@ import android.widget.Toast
 import com.dinas.perhubungan.adapter.ChatAdapter
 import com.dinas.perhubungan.data.model.JabatanModel
 import com.dinas.perhubungan.databinding.ActivityDataPegawaiBinding
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
-import java.text.SimpleDateFormat
 
 class DataPegawaiActivity : AppCompatActivity() {
 
@@ -23,6 +21,7 @@ class DataPegawaiActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var userList: ArrayList<JabatanModel>
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var originalUserList: ArrayList<JabatanModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +35,21 @@ class DataPegawaiActivity : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance()
 
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    performSearch(it)
+                }
+                return true
+            }
+        })
+
+        binding.btnBack.setOnClickListener { finish() }
+
         val layoutManager = LinearLayoutManager(this)
         binding.userListRecyclerView.layoutManager = layoutManager
 
@@ -46,10 +60,12 @@ class DataPegawaiActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 showLoading(true)
                 userList.clear()
+                originalUserList = ArrayList() // Inisialisasi originalUserList
                 for (snapshot1 in snapshot.children){
                     val user = snapshot1.getValue(JabatanModel::class.java)
                     user?.let {
                         userList.add(it)
+                        originalUserList.add(it)
                     }
                 }
                 chatAdapter.notifyDataSetChanged()
@@ -66,8 +82,17 @@ class DataPegawaiActivity : AppCompatActivity() {
         databaseReference.addValueEventListener(valueEventListener)
     }
 
-
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
+
+    private fun performSearch(query: String) {
+        val filteredList = originalUserList.filter { user ->
+            user.nama?.contains(query, ignoreCase = true) == true
+        }
+        userList.clear()
+        userList.addAll(filteredList)
+        chatAdapter.notifyDataSetChanged()
+    }
 }
+
