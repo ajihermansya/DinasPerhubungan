@@ -7,7 +7,6 @@
     tools:context=".ui.mainhome.fragment.NotifikasiFragment">
 
 
-
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"

@@ -141,7 +141,7 @@ class RegisterActivity : AppCompatActivity() {
 
             if (validateFields(nama_panjang, nip,  jabatan, tanggal,tlpn, password, confirmpassword)) {
                 if (isRegisteredNIP(nip)) {
-                    createUser(nama_panjang, nip, jabatan, tanggal, tlpn, password)
+                    createUser( nip,nama_panjang, jabatan, tanggal, tlpn, password)
                 } else {
                     showAlertDialog("Apakah anda pegawai Dinas Perhubungan? Tanyakan pada andmin anda!")
                 }
@@ -239,8 +239,8 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private fun createUser(
-        namaPanjang: String,
         nip: String,
+        namaPanjang: String,
         jabatan: String,
         tanggal: String,
         tlpn: String,
@@ -257,18 +257,20 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = mAuth.currentUser
                     user?.let {
-                        uploadImageToFirebase(nip, namaPanjang, jabatan, tanggal, tlpn, password)
+                        val uid = user.uid
+                        uploadImageToFirebase(nip, uid, namaPanjang, jabatan, tanggal, tlpn, password)
                     }
                 } else {
-                    Toast.makeText(this, "Succes creating user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error, Coba daftar lagi!", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
 
     private fun uploadImageToFirebase(
-        namaPanjang: String,
         nip: String,
+        uid: String,
+        namaPanjang: String,
         jabatan: String,
         tanggal: String,
         tlpn: String,
@@ -281,7 +283,7 @@ class RegisterActivity : AppCompatActivity() {
             .addOnSuccessListener { taskSnapshot ->
                 imgRef.downloadUrl.addOnSuccessListener { uri ->
                     val imageUrl = uri.toString()
-                    addUserToDatabase(namaPanjang, nip, jabatan, tanggal, tlpn, password, imageUrl)
+                    addUserToDatabase(nip, uid, namaPanjang, jabatan, tanggal, tlpn, password, imageUrl)
                 }
             }
             .addOnFailureListener { e ->
@@ -298,6 +300,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun addUserToDatabase(
         nip: String,
+        uid: String,
         namaPanjang: String,
         jabatan: String,
         tanggal: String,
@@ -308,7 +311,7 @@ class RegisterActivity : AppCompatActivity() {
         val email = "$nip@dishub.com"
         val database = FirebaseDatabase.getInstance()
         mDbRef = database.getReference()
-        mDbRef.child("users").child(nip).setValue(UserModel(email, namaPanjang, jabatan, tanggal, tlpn, password, imageUrl))
+        mDbRef.child("users").child(uid).setValue(UserModel(email, uid, namaPanjang, jabatan, tanggal, tlpn, password, imageUrl))
             .addOnSuccessListener {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
