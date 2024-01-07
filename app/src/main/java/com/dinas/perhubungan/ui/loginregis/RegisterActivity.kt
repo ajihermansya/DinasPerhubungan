@@ -250,24 +250,31 @@ class RegisterActivity : AppCompatActivity() {
             showAlertDialog("Please select an image")
             return
         }
-        showLoading(true)
-        uploadImageToFirebase(nip, mAuth.currentUser?.uid ?: "", namaPanjang, jabatan, tanggal, tlpn, password) {
-            // Setelah gambar diunggah, lanjutkan membuat pengguna
-            showLoading(true)
-            mAuth.createUserWithEmailAndPassword("$nip@dishub.com", password)
-                .addOnCompleteListener(this) { task ->
-                    showLoading(false)
-                    if (task.isSuccessful) {
-                        // Jika pembuatan pengguna berhasil, Anda tidak perlu melakukan apa pun di sini
-                        Toast.makeText(this, "Yeay, akun berhasil dibuat!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // Jika pembuatan pengguna gagal, tampilkan pesan kesalahan
-                        Toast.makeText(this, "Error, Coba daftar lagi!", Toast.LENGTH_SHORT).show()
-                    }
-                }
-        }
 
+        showLoading(true)
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            uploadImageToFirebase(nip, uid, namaPanjang, jabatan, tanggal, tlpn, password) {
+                // Setelah gambar diunggah, lanjutkan membuat pengguna
+                showLoading(true)
+                mAuth.createUserWithEmailAndPassword("$nip@dishub.com", password)
+                    .addOnCompleteListener(this) { task ->
+                        showLoading(false)
+                        if (task.isSuccessful) {
+                            // Jika pembuatan pengguna berhasil, Anda tidak perlu melakukan apa pun di sini
+                            Toast.makeText(this, "Yeay, akun berhasil dibuat!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Jika pembuatan pengguna gagal, tampilkan pesan kesalahan
+                            Toast.makeText(this, "Error, Coba daftar lagi!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
+        } else {
+            // Tangani jika pengguna tidak masuk
+            Toast.makeText(this, "Error, Pengguna tidak masuk!", Toast.LENGTH_SHORT).show()
+        }
     }
+
 
 
     private fun uploadImageToFirebase(
