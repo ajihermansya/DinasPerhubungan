@@ -68,4 +68,22 @@
     <string name="ketentuan_dan_privasi">Ketentuan dan Privasi</string>
     <string name="informasi_kenaikan_pangkat">Informasi Kenaikan Pangkat</string>
     <string name="notifikasi_informasi">Maaf, tidak ada informasi saat ini!</string>
+    <string name="kebijakan">Kebijakan Privasi</string>
+    <string name="about_app"><![CDATA[Syarat & Ketentuan Penggunaan Aplikasi]]></string>
+    <string name="text_one">Penerimaan Syarat dan Ketentuan Dengan mengakses atau menggunakan aplikasi Pengeingat Kenaikan Pangkat, Anda setuju untuk tunduk pada syarat dan ketentuan berikut. Jika Anda tidak setuju dengan syarat dan ketentuan ini, Anda tidak diperkenankan untuk menggunakan aplikasi ini.</string>
+    <string name="pengumpulan_informasi">1. Penggunaan Aplikasi</string>
+    <string name="desc_informasi">- Anda harus berusia minimal 18 tahun atau mencapai usia yang sah sesuai dengan hukum yang berlaku di wilayah Anda untuk menggunakan aplikasi ini.\n- Anda bertanggung jawab atas semua aktivitas yang terjadi dalam akun Anda.\n- Anda setuju untuk memberikan informasi pribadi yang akurat dan terkini saat membuat akun dan menggunakannya.\n- Anda tidak diperkenankan menggunakan aplikasi ini untuk tujuan ilegal atau melanggar hukum.</string>
+    <string name="pengguna_informasi">2. Privasi</string>
+    <string name="desc_pengguna">Kami menghormati privasi Anda. Informasi pribadi yang Anda berikan akan dikelola sesuai dengan Kebijakan Privasi kami</string>
+    <string name="keaman_data">3. Pemberitahuan dan Perubahan</string>
+    <string name="desc_data">Kami berhak untuk mengubah syarat dan ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Perubahan akan berlaku segera setelah dipublikasikan di aplikasi. Terus menggunakan aplikasi ini setelah perubahan berarti Anda menerima perubahan tersebut.</string>
+    <string name="pemabaruan">4. Hak Kekayaan Intelektual</string>
+    <string name="desc_pemebaruan">Semua hak kekayaan intelektual terkait dengan aplikasi ini, termasuk hak cipta dan merek dagang, tetap menjadi milik kami.</string>
+    <string name="desc_kontak">Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi kami atau penggunaan Aplikasi \"Pengigat Kenaikan Pangkat\", jangan ragu untuk menghubungi kami melalui alamat email yang tersedia di aplikasi.\n\nDengan menggunakan Aplikasi \"Pengigat Kenaikan Pangkat\", Anda menyetujui dan memahami ketentuan serta kebijakan privasi yang telah dijelaskan di atas. Kami berharap aplikasi ini dapat memberikan manfaat yang besar dalam memantau informasi tanggal kenaikan pangkat dan membantu meningkatkan elatabilitas yang teapat.\n\nTerima kasih telah memilih dan menggunakan Aplikasi \"Dinas Perhungan Kabupaten Banyuwangi\" untuk mendukung pengingat jadwal Anda.</string>
+    <string name="kontak_kami">5. KOntak Kami</string>
+    <string name="emails">mahesajabbar02@gmail.com</string>
+    <string name="empty_apps">Tidak ada aplikasi email yang tersedia!</string>
+    <string name="subject_email">Ketentuan Kebijakan Privasi</string>
+    <string name="isi_pesan">Kepada Tim Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi,\n\nSalam sejahtera,\n\nSaya adalah pengguna setia layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi dan saya ingin mengetahui lebih lanjut tentang kebijakan dan privasi yang diterapkan dalam penggunaan layanan ini.\n\nApakah Anda bisa memberikan detail terkait bagaimana layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi mengelola data pribadi pengguna? Saya sangat menghargai privasi saya dan ingin memastikan bahwa informasi yang saya berikan saat menggunakan layanan ini diperlakukan dengan aman dan sesuai dengan standar keamanan yang relevan.\n\nJika memungkinkan, saya juga ingin meminta salinan lengkap dari kebijakan privasi yang Anda terapkan. Informasi ini akan membantu saya untuk lebih memahami bagaimana data saya diperlakukan dan disimpan oleh layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi.\n\nTerima kasih atas perhatian dan waktu yang Anda berikan untuk menjawab pertanyaan saya. Saya sangat menghargai transparansi dan komitmen Anda dalam menjaga keamanan informasi pengguna.\n\nDengan hormat,\n\n[Nama Anda]\n[Informasi Kontak Anda]</string>
+
 </resources>
