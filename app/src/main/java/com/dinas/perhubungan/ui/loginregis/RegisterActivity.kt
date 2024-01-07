@@ -253,6 +253,7 @@ class RegisterActivity : AppCompatActivity() {
         showLoading(true)
         uploadImageToFirebase(nip, mAuth.currentUser?.uid ?: "", namaPanjang, jabatan, tanggal, tlpn, password) {
             // Setelah gambar diunggah, lanjutkan membuat pengguna
+            showLoading(true)
             mAuth.createUserWithEmailAndPassword("$nip@dishub.com", password)
                 .addOnCompleteListener(this) { task ->
                     showLoading(false)
