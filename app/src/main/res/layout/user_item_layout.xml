@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,6 +48,7 @@
                 android:id="@+id/name_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/name"
                 android:textSize="14sp"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_semibold"
@@ -57,14 +58,5 @@
 
         </LinearLayout>
 
-
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#33000000"
-            app:layout_constraintTop_toBottomOf="@id/textViewNumber"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

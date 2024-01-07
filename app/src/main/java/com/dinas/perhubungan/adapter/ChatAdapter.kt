@@ -22,7 +22,8 @@ class ChatAdapter(var context: Context, var list: ArrayList<JabatanModel>)
     }
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
        var user = list[position]
-        holder.binding.number.text = user.nama
+        holder.binding.nameList.text = user.nama
+        holder.binding.number.text = user.no.toString()
         //holder.binding.userName.text = user.name
 //
 //        holder.itemView.setOnClickListener {
