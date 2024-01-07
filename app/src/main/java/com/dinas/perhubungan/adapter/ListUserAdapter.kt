@@ -29,7 +29,6 @@ class ListUserAdapter(var context: Context, var list: ArrayList<JabatanModel>)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DetailJabatanActivity::class.java)
-            intent.putExtra("no", user.no)
             context.startActivity(intent)
         }
     }

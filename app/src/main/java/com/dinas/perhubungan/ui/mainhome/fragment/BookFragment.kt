@@ -1,21 +1,21 @@
 package com.dinas.perhubungan.ui.mainhome.fragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dinas.perhubungan.adapter.ListUserAdapter
 import com.dinas.perhubungan.data.model.JabatanModel
 import com.dinas.perhubungan.databinding.FragmentBookBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import timber.log.Timber
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.google.firebase.database.*
 
 class BookFragment : Fragment() {
     private lateinit var binding: FragmentBookBinding
@@ -23,7 +23,10 @@ class BookFragment : Fragment() {
     private lateinit var userList: ArrayList<JabatanModel>
     private lateinit var listUserAdapter: ListUserAdapter
     private lateinit var originalUserList: ArrayList<JabatanModel>
+    private lateinit var sharedPreferences: SharedPreferences
 
+    private val PREFS_NAME = "MyPrefs" // Nama SharedPreferences
+    private val USER_LIST_KEY = "UserListKey"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,18 @@ class BookFragment : Fragment() {
         binding.userListRecyclerView.adapter = listUserAdapter
 
         database = FirebaseDatabase.getInstance()
+        sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
+        setupSearchView()
+        setupRecyclerView()
+
+        loadUsersFromFirebase()
+        loadUserListFromSharedPreferences()
+
+        return binding.root
+    }
+
+    private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -48,46 +62,50 @@ class BookFragment : Fragment() {
                 return true
             }
         })
+    }
 
-
+    private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.userListRecyclerView.layoutManager = layoutManager
+    }
 
+    private fun loadUsersFromFirebase() {
+        showLoading(true)
         val databaseReference = database.reference.child("1upeIRUT1x-fPdBdq6X7sM8aSe7QHbCACFvRfROhCnpc")
             .child("data_jabatan")
-        showLoading(true)
+
         val valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                showLoading(true)
                 userList.clear()
-                originalUserList = ArrayList() // Inisialisasi originalUserList
+                originalUserList = ArrayList()
                 for (snapshot1 in snapshot.children){
                     val user = snapshot1.getValue(JabatanModel::class.java)
                     user?.let {
                         userList.add(it)
                         originalUserList.add(it)
+                        showLoading(false)
                     }
                 }
                 listUserAdapter.notifyDataSetChanged()
                 if (userList.isEmpty()) {
-                    Timber.tag("DataPegawaiActivity").d("Tidak ada data yang ditemukan")
                     Toast.makeText(requireContext(), "Data pegawai tidak ditemukan!!", Toast.LENGTH_SHORT).show()
                 }
-                showLoading(false)
             }
             override fun onCancelled(error: DatabaseError) {
+                showLoading(false)
                 Log.e("DataPegawaiActivity", "Gagal mengambil data: ${error.message}")
             }
         }
-        databaseReference.addValueEventListener(valueEventListener)
-
-
-        return binding.root
+        databaseReference.addListenerForSingleValueEvent(valueEventListener)
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    private fun loadUserListFromSharedPreferences() {
+        val gson = Gson()
+        val json = sharedPreferences.getString(USER_LIST_KEY, "")
+        val type = object : TypeToken<ArrayList<JabatanModel>>() {}.type
+        originalUserList = gson.fromJson(json, type) ?: ArrayList()
     }
+
 
     private fun performSearch(query: String) {
         val filteredList = originalUserList.filter { user ->
@@ -98,5 +116,7 @@ class BookFragment : Fragment() {
         listUserAdapter.notifyDataSetChanged()
     }
 
-
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 }
