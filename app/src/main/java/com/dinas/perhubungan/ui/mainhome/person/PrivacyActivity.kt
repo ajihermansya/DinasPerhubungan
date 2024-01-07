@@ -19,8 +19,6 @@ class PrivacyActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-
-
         binding.iconBack.setOnClickListener {
             finish()
         }
