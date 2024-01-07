@@ -42,6 +42,8 @@ class MyFragment : Fragment() {
     private lateinit var userNameTextView: TextView
     private lateinit var userEmailTextView: TextView
     private lateinit var userjabatanTextView: TextView
+    private lateinit var imageView: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +53,6 @@ class MyFragment : Fragment() {
         prefsManager = PrefsManager(requireContext())
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-
         val language = binding.root.findViewById<LinearLayout>(R.id.language)
         val notif = binding.root.findViewById<LinearLayout>(R.id.notifikasi)
         val privasi = binding.root.findViewById<LinearLayout>(R.id.ketentuan_privasi)
@@ -60,6 +61,7 @@ class MyFragment : Fragment() {
         userNameTextView = binding.root.findViewById(R.id.userNames)
         userEmailTextView = binding.root.findViewById(R.id.text_email)
         userjabatanTextView = binding.root.findViewById(R.id.jabatan_person)
+
         val keluarButton = binding.root.findViewById<Button>(R.id.riwayatKonseling)
 
         language.setOnClickListener {
@@ -142,9 +144,7 @@ class MyFragment : Fragment() {
                     userNameTextView.text = userName
                     userEmailTextView.text = userNip
                     userjabatanTextView.text = userJabatan
-                    val imageView = requireView().findViewById<ImageView>(R.id.userImage)
-
-                    Glide.with(requireContext()).load(userImage).into(imageView)
+                    //Glide.with(requireContext()).load(userImage).into(imageView)
 
                     // Menyimpan informasi pengguna ke SharedPreferences
                     saveUserToSharedPreferences(userName, userNip,userJabatan, userImage)
