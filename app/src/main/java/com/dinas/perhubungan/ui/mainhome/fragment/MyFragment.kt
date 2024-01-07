@@ -1,38 +1,25 @@
-package com.dinas.perhubungan.ui.mainhome.fragment
-
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.PrefsManager
 import com.dinas.perhubungan.data.model.UserModel
 import com.dinas.perhubungan.databinding.FragmentMyBinding
 import com.dinas.perhubungan.ui.loginregis.LoginActivity
-import com.dinas.perhubungan.ui.mainhome.person.AkunActivity
-import com.dinas.perhubungan.ui.mainhome.person.EditProfileActivity
 import com.dinas.perhubungan.ui.mainhome.person.NotifikasiActivity
 import com.dinas.perhubungan.ui.mainhome.person.PrivacyActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
-
+import com.google.firebase.database.*
 
 class MyFragment : Fragment() {
     private lateinit var binding: FragmentMyBinding
@@ -48,11 +35,18 @@ class MyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentMyBinding.inflate(inflater, container, false)
         prefsManager = PrefsManager(requireContext())
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+
+        // Initialize views and set click listeners
+        initViews()
+
+        return binding.root
+    }
+
+    private fun initViews() {
         val language = binding.root.findViewById<LinearLayout>(R.id.language)
         val notif = binding.root.findViewById<LinearLayout>(R.id.notifikasi)
         val privasi = binding.root.findViewById<LinearLayout>(R.id.ketentuan_privasi)
@@ -61,6 +55,7 @@ class MyFragment : Fragment() {
         userNameTextView = binding.root.findViewById(R.id.userNames)
         userEmailTextView = binding.root.findViewById(R.id.text_email)
         userjabatanTextView = binding.root.findViewById(R.id.jabatan_person)
+        imageView = binding.root.findViewById(R.id.userImage)
 
         val keluarButton = binding.root.findViewById<Button>(R.id.riwayatKonseling)
 
@@ -69,13 +64,11 @@ class MyFragment : Fragment() {
         }
 
         notif.setOnClickListener {
-            val intent = Intent(requireContext(), NotifikasiActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), NotifikasiActivity::class.java))
         }
 
         privasi.setOnClickListener {
-            val intent = Intent(requireContext(), PrivacyActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), PrivacyActivity::class.java))
         }
 
         akun.setOnClickListener {
@@ -86,20 +79,21 @@ class MyFragment : Fragment() {
             showUnderDevelopmentDialog(requireContext())
         }
 
-
-            keluarButton.setOnClickListener {
-            prefsManager.token = ""
-            prefsManager.userEmail = ""
-            prefsManager.isExampleLogin = false
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+        keluarButton.setOnClickListener {
+            logout()
         }
-
-        return binding.root
     }
 
-    fun showUnderDevelopmentDialog(context: Context) {
+    private fun logout() {
+        prefsManager.token = ""
+        prefsManager.userEmail = ""
+        prefsManager.isExampleLogin = false
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
+    private fun showUnderDevelopmentDialog(context: Context) {
         val dialog = AlertDialog.Builder(context)
             .setTitle("Aplikasi dalam Pengembangan")
             .setMessage("Maaf, fitur ini sedang dalam pengembangan.")
@@ -111,13 +105,10 @@ class MyFragment : Fragment() {
         dialog.show()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
 
-        // Check apakah pengguna sudah masuk atau belum
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             fetchUserName(currentUser.uid)
@@ -140,14 +131,12 @@ class MyFragment : Fragment() {
                     val userImage = userModel?.imageUrl ?: "Image tidak tersedia"
                     val userJabatan = userModel?.jabatan ?: "Jabatan tidak tersedia"
 
-                    // Mengisi TextView dan ImageView dengan informasi pengguna dari Firebase
                     userNameTextView.text = userName
                     userEmailTextView.text = userNip
                     userjabatanTextView.text = userJabatan
-                    //Glide.with(requireContext()).load(userImage).into(imageView)
+                    Glide.with(requireContext()).load(userImage).into(imageView)
 
-                    // Menyimpan informasi pengguna ke SharedPreferences
-                    saveUserToSharedPreferences(userName, userNip,userJabatan, userImage)
+                    saveUserToSharedPreferences(userName, userNip, userJabatan, userImage)
                 } else {
                     Log.d("fetchUserName", "Dokumen pengguna tidak ditemukan")
                 }
@@ -171,18 +160,15 @@ class MyFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Menampilkan informasi pengguna dari SharedPreferences saat fragment dibuka
         val sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val userName = sharedPreferences.getString("userName", "") ?: ""
         val userNip = sharedPreferences.getString("userNip", "") ?: ""
         val userJabatan = sharedPreferences.getString("userJabatan", "") ?: ""
         val userImage = sharedPreferences.getString("userImage", "") ?: ""
 
-        // Menampilkan informasi pengguna ke UI
         userNameTextView.text = userName
         userEmailTextView.text = userNip
         userjabatanTextView.text = userJabatan
-        val imageView = requireView().findViewById<ImageView>(R.id.userImage)
         Glide.with(requireContext()).load(userImage).into(imageView)
     }
 }

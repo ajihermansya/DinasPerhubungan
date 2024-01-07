@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.dinas.perhubungan.adapter.ChatAdapter
+import com.dinas.perhubungan.adapter.ListUserAdapter
 import com.dinas.perhubungan.data.model.JabatanModel
 import com.dinas.perhubungan.databinding.ActivityDataPegawaiBinding
 import com.google.firebase.database.DataSnapshot
@@ -20,7 +20,7 @@ class DataPegawaiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDataPegawaiBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var userList: ArrayList<JabatanModel>
-    private lateinit var chatAdapter: ChatAdapter
+    private lateinit var listUserAdapter: ListUserAdapter
     private lateinit var originalUserList: ArrayList<JabatanModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,8 @@ class DataPegawaiActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         userList = ArrayList()
-        chatAdapter = ChatAdapter(this, userList)
-        binding.userListRecyclerView.adapter = chatAdapter
+        listUserAdapter = ListUserAdapter(this, userList)
+        binding.userListRecyclerView.adapter = listUserAdapter
 
         database = FirebaseDatabase.getInstance()
 
@@ -68,7 +68,7 @@ class DataPegawaiActivity : AppCompatActivity() {
                         originalUserList.add(it)
                     }
                 }
-                chatAdapter.notifyDataSetChanged()
+                listUserAdapter.notifyDataSetChanged()
                 if (userList.isEmpty()) {
                     Timber.tag("DataPegawaiActivity").d("Tidak ada data yang ditemukan")
                     Toast.makeText(this@DataPegawaiActivity, "Data pegawai tidak ditemukan!!", Toast.LENGTH_SHORT).show()
@@ -92,7 +92,7 @@ class DataPegawaiActivity : AppCompatActivity() {
         }
         userList.clear()
         userList.addAll(filteredList)
-        chatAdapter.notifyDataSetChanged()
+        listUserAdapter.notifyDataSetChanged()
     }
 }
 

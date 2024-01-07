@@ -272,25 +272,29 @@ class RegisterActivity : AppCompatActivity() {
         jabatan: String,
         tanggal: String,
         tlpn: String,
-        password: String,
+        password: String
     ) {
         val storageRef = storage.reference
-        val imgRef = storageRef.child("images/${mAuth.currentUser?.uid}.jpg")
+        val imgRef = storageRef.child("images/${uid}.jpg")
 
         imgRef.putFile(selectedImg)
-            .addOnSuccessListener { taskSnapshot ->
-                imgRef.downloadUrl.addOnSuccessListener { uri ->
-                    val imageUrl = uri.toString()
+            .continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                imgRef.downloadUrl
+            }
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val imageUrl = task.result.toString()
                     addUserToDatabase(nip, uid, namaPanjang, jabatan, tanggal, tlpn, password, imageUrl)
+                } else {
+                    Toast.makeText(this, "Upload failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    showLoading(false)
                 }
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
-                showLoading(false)
-            }
-
-
-
     }
 
 

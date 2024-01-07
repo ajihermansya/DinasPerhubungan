@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dinas.perhubungan.adapter.ChatAdapter
+import com.dinas.perhubungan.adapter.ListUserAdapter
 import com.dinas.perhubungan.data.model.JabatanModel
 import com.dinas.perhubungan.databinding.FragmentBookBinding
 import com.google.firebase.database.DataSnapshot
@@ -21,7 +21,7 @@ class BookFragment : Fragment() {
     private lateinit var binding: FragmentBookBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var userList: ArrayList<JabatanModel>
-    private lateinit var chatAdapter: ChatAdapter
+    private lateinit var listUserAdapter: ListUserAdapter
     private lateinit var originalUserList: ArrayList<JabatanModel>
 
 
@@ -31,8 +31,8 @@ class BookFragment : Fragment() {
     ): View? {
         binding = FragmentBookBinding.inflate(inflater, container, false)
         userList = ArrayList()
-        chatAdapter = ChatAdapter(requireContext(), userList)
-        binding.userListRecyclerView.adapter = chatAdapter
+        listUserAdapter = ListUserAdapter(requireContext(), userList)
+        binding.userListRecyclerView.adapter = listUserAdapter
 
         database = FirebaseDatabase.getInstance()
 
@@ -68,7 +68,7 @@ class BookFragment : Fragment() {
                         originalUserList.add(it)
                     }
                 }
-                chatAdapter.notifyDataSetChanged()
+                listUserAdapter.notifyDataSetChanged()
                 if (userList.isEmpty()) {
                     Timber.tag("DataPegawaiActivity").d("Tidak ada data yang ditemukan")
                     Toast.makeText(requireContext(), "Data pegawai tidak ditemukan!!", Toast.LENGTH_SHORT).show()
@@ -95,7 +95,7 @@ class BookFragment : Fragment() {
         }
         userList.clear()
         userList.addAll(filteredList)
-        chatAdapter.notifyDataSetChanged()
+        listUserAdapter.notifyDataSetChanged()
     }
 
 

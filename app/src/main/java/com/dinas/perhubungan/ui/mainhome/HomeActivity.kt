@@ -1,6 +1,7 @@
 package com.dinas.perhubungan.ui.mainhome
 
 import HomeFragment
+import MyFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,7 +10,6 @@ import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.PrefsManager
 import com.dinas.perhubungan.databinding.ActivityHomeBinding
 import com.dinas.perhubungan.ui.mainhome.fragment.BookFragment
-import com.dinas.perhubungan.ui.mainhome.fragment.MyFragment
 import com.dinas.perhubungan.ui.mainhome.fragment.NotifikasiFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth

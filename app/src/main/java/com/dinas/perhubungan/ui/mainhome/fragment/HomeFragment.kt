@@ -20,14 +20,13 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        database = FirebaseDatabase.getInstance()
-        firebaseAuth = FirebaseAuth.getInstance()
         return binding.root
     }
 
@@ -35,6 +34,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
 
         // Check apakah pengguna sudah masuk atau belum
         val currentUser = firebaseAuth.currentUser
@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchUserName(nip: String) {
-        val databaseReference = FirebaseDatabase.getInstance().reference.child("users").child(nip)
+        val databaseReference = database.reference.child("users").child(nip)
 
         databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -62,24 +62,24 @@ class HomeFragment : Fragment() {
                     binding.nameUser.text = userName
                     binding.nip.text = userNip
                     binding.jabatan.text = userJabatan
-                    binding.userImages
-                    //Glide.with(requireContext()).load(userImage).into(imageView)
+
                     // Menyimpan informasi pengguna ke SharedPreferences
                     saveUserToSharedPreferences(userName, userNip, userJabatan, userImage)
-
+                    loadUserFromSharedPreferences()
                 } else {
                     Log.d("fetchUserName", "Dokumen pengguna tidak ditemukan")
+                    Toast.makeText(requireContext(), "Data pengguna tidak ditemukan", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.e("fetchUserName", "Gagal mendapatkan data pengguna", databaseError.toException())
+                Toast.makeText(requireContext(), "Gagal mendapatkan data pengguna", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun saveUserToSharedPreferences(userName: String, userNip: String, userJabatan: String, userImage: String) {
-        val sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString("userName", userName)
         editor.putString("userNip", userNip)
@@ -88,20 +88,16 @@ class HomeFragment : Fragment() {
         editor.apply()
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Mengambil informasi pengguna dari SharedPreferences saat fragment dibuka
-        val sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val userName = sharedPreferences.getString("userName", "") ?: ""
-        val userNip = sharedPreferences.getString("userNip", "") ?: ""
-        val userJabatan = sharedPreferences.getString("userJabatan", "") ?: ""
-        val userImage = sharedPreferences.getString("userImage", "") ?: ""
+    private fun loadUserFromSharedPreferences() {
+        val userName = sharedPreferences.getString("userName", "Nama tidak tersedia") ?: "Nama tidak tersedia"
+        val userNip = sharedPreferences.getString("userNip", "Nip tidak tersedia") ?: "Nip tidak tersedia"
+        val userJabatan = sharedPreferences.getString("userJabatan", "Jabatan tidak tersedia") ?: "Jabatan tidak tersedia"
+        val userImage = sharedPreferences.getString("userImage", "Image tidak tersedia") ?: "Image tidak tersedia"
 
         // Menampilkan informasi pengguna ke UI
         binding.nameUser.text = userName
         binding.nip.text = userNip
         binding.jabatan.text = userJabatan
-        val imageView = binding.userImages
-        Glide.with(requireContext()).load(userImage).into(imageView)
+        Glide.with(requireContext()).load(userImage).into(binding.userImages)
     }
 }

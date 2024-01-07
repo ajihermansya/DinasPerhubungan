@@ -1,5 +1,6 @@
 package com.dinas.perhubungan.adapter
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.model.JabatanModel
 import com.dinas.perhubungan.databinding.UserItemLayoutBinding
+import com.dinas.perhubungan.ui.menu_admin.detail_jabatan.DetailJabatanActivity
 
 
-class ChatAdapter(var context: Context, var list: ArrayList<JabatanModel>)
-    : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
+class ListUserAdapter(var context: Context, var list: ArrayList<JabatanModel>)
+    : RecyclerView.Adapter<ListUserAdapter.ChatViewHolder>() {
 
     inner class ChatViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var binding : UserItemLayoutBinding = UserItemLayoutBinding.bind(view)
@@ -24,13 +26,12 @@ class ChatAdapter(var context: Context, var list: ArrayList<JabatanModel>)
        var user = list[position]
         holder.binding.nameList.text = user.nama
         holder.binding.number.text = user.no.toString()
-        //holder.binding.userName.text = user.name
-//
-//        holder.itemView.setOnClickListener {
-//            val intent = Intent(context, DetailJabatanActivity::class.java)
-//            intent.putExtra("uid", user.no)
-//            context.startActivity(intent)
-//        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailJabatanActivity::class.java)
+            intent.putExtra("no", user.no)
+            context.startActivity(intent)
+        }
     }
     override fun getItemCount(): Int {
         return list.size

@@ -86,5 +86,18 @@
     <string name="subject_email">Ketentuan Kebijakan Privasi</string>
     <string name="isi_pesan">Kepada Tim Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi,\n\nSalam sejahtera,\n\nSaya adalah pengguna setia layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi dan saya ingin mengetahui lebih lanjut tentang kebijakan dan privasi yang diterapkan dalam penggunaan layanan ini.\n\nApakah Anda bisa memberikan detail terkait bagaimana layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi mengelola data pribadi pengguna? Saya sangat menghargai privasi saya dan ingin memastikan bahwa informasi yang saya berikan saat menggunakan layanan ini diperlakukan dengan aman dan sesuai dengan standar keamanan yang relevan.\n\nJika memungkinkan, saya juga ingin meminta salinan lengkap dari kebijakan privasi yang Anda terapkan. Informasi ini akan membantu saya untuk lebih memahami bagaimana data saya diperlakukan dan disimpan oleh layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi.\n\nTerima kasih atas perhatian dan waktu yang Anda berikan untuk menjawab pertanyaan saya. Saya sangat menghargai transparansi dan komitmen Anda dalam menjaga keamanan informasi pengguna.\n\nDengan hormat,\n\n[Nama Anda]\n[Informasi Kontak Anda]</string>
     <string name="normal">Ketua Bidang Riset dan Penelitian</string>
+    <string name="book">Data Pegawai</string>
+    <string name="biodata">Biodata</string>
+    <string name="detail_biodata">Detail Biodata</string>
+    <string name="nama">Nama :</string>
+    <string name="nip_tikwa">Nip :</string>
+    <string name="number_nip">362155401145</string>
+    <string name="jabatan_detail">Jabatan :</string>
+    <string name="kepala_bidang_penelitian">Kepala Bidang Penelitian</string>
+    <string name="pangkat_detail">Pangkat :</string>
+    <string name="pembinautamamuda_iv_c">PembinaUtamaMuda(IV/c)</string>
+    <string name="golongan_detail">Golongan :</string>
+    <string name="tanggal_kenaikan_pangkat">Tanggal Kenaikan Pangkat :</string>
+    <string name="date">10-23-2098</string>
 
 </resources>
