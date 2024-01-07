@@ -76,6 +76,36 @@
                         android:layout_marginBottom="6dp"
                         android:id="@+id/text_email"/>
 
+                    <LinearLayout
+                        android:id="@+id/button_siswa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_email"
+                        android:orientation="horizontal"
+                        android:background="@drawable/shape_rectangel_validasi">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/validasi"
+                            android:layout_marginStart="4dp"
+                            android:contentDescription="@string/todo" />
+
+                        <TextView
+                            android:id="@+id/jabatan_person"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/normal"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:textAllCaps="false"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"/>
+
+                    </LinearLayout>
+
                 </RelativeLayout>
             </LinearLayout>
 

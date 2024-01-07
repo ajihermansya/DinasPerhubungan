@@ -58,7 +58,7 @@
     <string name="desc_info_four">Menyediakan sarana dan prasarana penerangan lampu jalan, yang digunakan untuk penerangan jalan dimalam hari sehingga mempermudah pejalan kaki, pesepeda dan pengendara. diharapkan meningkatkan keselamatan lalu lintas dan keamanan.</string>
     <string name="desc_info_five">Perencanaan, pengadaan, pemasangan, pengaturan dan pemeliharaan fasilitas perlengkapan jalan. Dalam rangka mewujudkan, mendukung dan memelihara keamanan, keselamatan, ketertiban, dan kelancaran lalu lintas.</string>
     <string name="desc_info_six">Lalu lintas dan angkutan jalan (LLAJ). Satu kesatuan sistem yang terdisi atas lalu lintas, angkutan jalan, jaringan lalu lintas dan angkutan jalan, prasarana lalu lintas dan angkutan jalan, kendaraan, pengemudi, pengguna jalan, serta pengelolaannya.</string>
-    <string name="My">My</string>
+    <string name="My">Profile</string>
     <string name="hai">Hai,</string>
     <string name="email">ajihermansya14@gmail.com</string>
     <string name="keluar">Keluar</string>
@@ -85,5 +85,6 @@
     <string name="empty_apps">Tidak ada aplikasi email yang tersedia!</string>
     <string name="subject_email">Ketentuan Kebijakan Privasi</string>
     <string name="isi_pesan">Kepada Tim Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi,\n\nSalam sejahtera,\n\nSaya adalah pengguna setia layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi dan saya ingin mengetahui lebih lanjut tentang kebijakan dan privasi yang diterapkan dalam penggunaan layanan ini.\n\nApakah Anda bisa memberikan detail terkait bagaimana layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi mengelola data pribadi pengguna? Saya sangat menghargai privasi saya dan ingin memastikan bahwa informasi yang saya berikan saat menggunakan layanan ini diperlakukan dengan aman dan sesuai dengan standar keamanan yang relevan.\n\nJika memungkinkan, saya juga ingin meminta salinan lengkap dari kebijakan privasi yang Anda terapkan. Informasi ini akan membantu saya untuk lebih memahami bagaimana data saya diperlakukan dan disimpan oleh layanan Pengingat Jadwal Kenaikan Pangkat Dinas Perhubungan Banyuwangi.\n\nTerima kasih atas perhatian dan waktu yang Anda berikan untuk menjawab pertanyaan saya. Saya sangat menghargai transparansi dan komitmen Anda dalam menjaga keamanan informasi pengguna.\n\nDengan hormat,\n\n[Nama Anda]\n[Informasi Kontak Anda]</string>
+    <string name="normal">Ketua Bidang Riset dan Penelitian</string>
 
 </resources>

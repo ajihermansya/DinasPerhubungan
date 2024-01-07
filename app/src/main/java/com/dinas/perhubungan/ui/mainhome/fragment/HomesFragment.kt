@@ -1,20 +1,19 @@
 package com.dinas.perhubungan.ui.mainhome.fragment
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.model.UserModel
-import com.dinas.perhubungan.databinding.FragmentNotifikasiBinding
+import com.dinas.perhubungan.databinding.FragmentHomeBinding
+import com.dinas.perhubungan.databinding.FragmentHomesBinding
 import com.dinas.perhubungan.ui.loginregis.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,22 +22,20 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class NotifikasiFragment : Fragment() {
-    private lateinit var binding: FragmentNotifikasiBinding
+class HomesFragment : Fragment() {
+
+    private lateinit var binding: FragmentHomesBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-    private lateinit var userTanggalTextView: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentNotifikasiBinding.inflate(inflater, container, false)
-        firebaseAuth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
 
-        val notif = binding.root.findViewById<Switch>(R.id.notif_switch)
-        userTanggalTextView = binding.root.findViewById(R.id.tanggal_notif)
+        binding = FragmentHomesBinding.inflate(inflater, container, false)
+        database = FirebaseDatabase.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
+
 
         return binding.root
     }
@@ -59,21 +56,31 @@ class NotifikasiFragment : Fragment() {
         }
     }
 
+
+
+
+
+
+
     private fun fetchUserName(nip: String) {
         val databaseReference = FirebaseDatabase.getInstance().reference.child("users").child(nip)
 
         databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    // Dokumen pengguna ditemukan
                     val userModel = dataSnapshot.getValue(UserModel::class.java)
-                    val tanggal = userModel?.tanggal ?: "Tanggal tidak tersedia"
+                    val userName = userModel?.nama_panjang ?: "Nama tidak tersedia"
+                    val userNip = userModel?.nip?.replace(Regex("[^0-9]"), "") ?: "Nip tidak tersedia"
+                    val userJabatan = userModel?.jabatan ?: "Jabatan tidak tersedia"
+                    val userImage = userModel?.imageUrl ?: "Image tidak tersedia"
+                    binding.nameUser.text = userName
+                    binding.nip.text = userNip
+                    binding.jabatan.text = userJabatan
+                    val imageView = binding.userImages
+                    Glide.with(requireContext()).load(userImage).into(imageView)
 
 
-                    // Mengisi TextView dan ImageView dengan informasi pengguna dari Firebase
-                    userTanggalTextView.text = tanggal
-
-
-                    saveUserToSharedPreferences(tanggal)
                 } else {
                     Log.d("fetchUserName", "Dokumen pengguna tidak ditemukan")
                 }
@@ -86,22 +93,6 @@ class NotifikasiFragment : Fragment() {
     }
 
 
-    private fun saveUserToSharedPreferences(tanggal: String) {
-        val sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString("userTanggal", tanggal)
-        editor.apply()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        // Menampilkan informasi pengguna dari SharedPreferences saat fragment dibuka
-        val sharedPreferences = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val userTanggal = sharedPreferences.getString("userTanggal", "") ?: ""
-
-        // Menampilkan informasi pengguna ke UI
-        userTanggalTextView.text = userTanggal
-
-    }
 
 }
