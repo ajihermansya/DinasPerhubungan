@@ -1,8 +1,9 @@
 package com.dinas.perhubungan.ui.menu_admin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.util.Log
 import com.dinas.perhubungan.adapter.ChatAdapter
 import com.dinas.perhubungan.data.model.JabatanModel
 import com.dinas.perhubungan.databinding.ActivityDataPegawaiBinding
@@ -11,6 +12,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
 
 class DataPegawaiActivity : AppCompatActivity() {
 
@@ -34,7 +36,8 @@ class DataPegawaiActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.userListRecyclerView.layoutManager = layoutManager
 
-        val databaseReference = database.reference.child("1upeIRUT1x-fPdBdq6X7sM8aSe7QHbCACFvRfROhCnpc").child("data_jabatan")
+        val databaseReference = database.reference.child("1upeIRUT1x-fPdBdq6X7sM8aSe7QHbCACFvRfROhCnpc")
+            .child("data_jabatan")
 
         val valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -45,11 +48,14 @@ class DataPegawaiActivity : AppCompatActivity() {
                         userList.add(it)
                     }
                 }
-                chatAdapter.notifyDataSetChanged() // Memperbarui tampilan setelah memperbarui userList
-            }
+                chatAdapter.notifyDataSetChanged()
 
+                if (userList.isEmpty()) {
+                    Log.d("DataPegawaiActivity", "Tidak ada data yang ditemukan")
+                }
+            }
             override fun onCancelled(error: DatabaseError) {
-                // Tindakan yang dapat dilakukan saat pembatalan
+                Log.e("DataPegawaiActivity", "Gagal mengambil data: ${error.message}")
             }
         }
 
