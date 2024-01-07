@@ -1,5 +1,6 @@
 package com.dinas.perhubungan.ui.mainhome.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.PrefsManager
 import com.dinas.perhubungan.databinding.FragmentMyBinding
@@ -64,16 +66,15 @@ class MyFragment : Fragment() {
         }
 
         akun.setOnClickListener {
-            val intent = Intent(requireContext(), AkunActivity::class.java)
-            startActivity(intent)
+            showUnderDevelopmentDialog(requireContext())
         }
 
         edit.setOnClickListener {
-            val intent = Intent(requireContext(), EditProfileActivity::class.java)
-            startActivity(intent)
+            showUnderDevelopmentDialog(requireContext())
         }
 
-        keluarButton.setOnClickListener {
+
+            keluarButton.setOnClickListener {
             prefsManager.token = ""
             prefsManager.userEmail = ""
             prefsManager.isExampleLogin = false
@@ -84,5 +85,19 @@ class MyFragment : Fragment() {
 
         return binding.root
     }
+
+    fun showUnderDevelopmentDialog(context: Context) {
+        val dialog = AlertDialog.Builder(context)
+            .setTitle("Aplikasi dalam Pengembangan")
+            .setMessage("Maaf, fitur ini sedang dalam pengembangan.")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        dialog.show()
+    }
+
+
 
 }
