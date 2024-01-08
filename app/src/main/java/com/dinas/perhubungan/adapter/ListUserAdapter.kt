@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dinas.perhubungan.R
 import com.dinas.perhubungan.data.model.JabatanModel
@@ -29,8 +30,18 @@ class ListUserAdapter(var context: Context, var list: ArrayList<JabatanModel>)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DetailJabatanActivity::class.java)
+            intent.putExtra("no", user.no)
+            intent.putExtra("nama", user.nama)
+            intent.putExtra("pangkat", user.pangkat)
+            intent.putExtra("golongan", user.golongan)
+            intent.putExtra("jabatan", user.jabatan)
+            intent.putExtra("tanggal_kenaikan", user.tanggal_kenaikan)
+
             context.startActivity(intent)
         }
+
+
+
     }
     override fun getItemCount(): Int {
         return list.size

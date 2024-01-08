@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.menu_admin.detail_jabatan.DetailJabatanActivity">
 
     <RelativeLayout
@@ -329,7 +331,7 @@
             android:gravity="left"
             android:maxLines="1"
             android:text="@string/date"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
     </LinearLayout>
@@ -339,7 +341,29 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="@color/grey"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout8"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout8" />
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout9"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout9" />
+
+
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/motif_bawah"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/motif_bawah"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
