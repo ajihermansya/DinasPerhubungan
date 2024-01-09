@@ -212,10 +212,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:hint="@string/dd_mm_yyyy"
+                android:textColorHint="@color/black"
                 android:background="@drawable/rectangel_white"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:inputType="date"
+                android:inputType="numberDecimal"
                 android:padding="8dp"
                 android:textSize="12sp"
                 android:textColor="@color/black" />
