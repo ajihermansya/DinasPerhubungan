@@ -216,7 +216,7 @@
                 android:background="@drawable/rectangel_white"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:inputType="numberDecimal"
+                android:inputType="text"
                 android:padding="8dp"
                 android:textSize="12sp"
                 android:textColor="@color/black" />
