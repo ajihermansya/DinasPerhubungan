@@ -1,3 +1,4 @@
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,8 +13,10 @@ import com.bumptech.glide.Glide
 import com.dinas.perhubungan.data.model.UserModel
 import com.dinas.perhubungan.databinding.FragmentHomeBinding
 import com.dinas.perhubungan.ui.loginregis.LoginActivity
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.messaging.FirebaseMessaging
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +30,25 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+      /*  binding.token.setOnClickListener {
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+
+                // Log and toast
+                Log.d("FCM", token)
+                Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
+            })
+        }
+
+       */
+
         return binding.root
     }
 

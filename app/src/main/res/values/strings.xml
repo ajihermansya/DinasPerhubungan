@@ -99,5 +99,8 @@
     <string name="golongan_detail">Golongan :</string>
     <string name="tanggal_kenaikan_pangkat">Tanggal Kenaikan Pangkat :</string>
     <string name="date">10-23-2098</string>
+    <string name="title">Title</string>
+    <string name="default_notification_channel_id" translatable="false">YOUR_DEFAULT_CHANNEL_ID</string>
+
 
 </resources>
